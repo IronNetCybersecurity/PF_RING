@@ -6965,11 +6965,9 @@ static int ring_setsockopt(struct socket *sock,
 
 #if (defined(UTS_UBUNTU_RELEASE_ABI) && ( \
        (UBUNTU_VERSION_CODE == KERNEL_VERSION(4,2,0) && UTS_UBUNTU_RELEASE_ABI >= 28) || \
-       (UBUNTU_VERSION_CODE == KERNEL_VERSION(4,4,0) && UTS_UBUNTU_RELEASE_ABI >= 22) || \
-       UBUNTU_VERSION_CODE > KERNEL_VERSION(4,4,0))) || \
-    (!defined(UTS_UBUNTU_RELEASE_ABI) && \
-     LINUX_VERSION_CODE >= KERNEL_VERSION(4,6,0) && \
-     LINUX_VERSION_CODE < KERNEL_VERSION(4,7,0)) 
+       (UBUNTU_VERSION_CODE == KERNEL_VERSION(4,4,0) && UTS_UBUNTU_RELEASE_ABI >= 22))) || \
+    (LINUX_VERSION_CODE >= KERNEL_VERSION(4,4,8) && LINUX_VERSION_CODE < KERNEL_VERSION(4,5,0)) || \
+    (LINUX_VERSION_CODE >= KERNEL_VERSION(4,6,0) && LINUX_VERSION_CODE < KERNEL_VERSION(4,7,0)) 
       ret = __sk_attach_filter(&fprog, pfr->sk, sock_owned_by_user(pfr->sk));
 #else
       ret = sk_attach_filter(&fprog, pfr->sk);
@@ -6985,11 +6983,9 @@ static int ring_setsockopt(struct socket *sock,
       printk("[PF_RING] Removing BPF filter\n");
 #if (defined(UTS_UBUNTU_RELEASE_ABI) && (\
        (UBUNTU_VERSION_CODE == KERNEL_VERSION(4,2,0) && UTS_UBUNTU_RELEASE_ABI >= 28) || \
-       (UBUNTU_VERSION_CODE == KERNEL_VERSION(4,4,0) && UTS_UBUNTU_RELEASE_ABI >= 22) || \
-       UBUNTU_VERSION_CODE > KERNEL_VERSION(4,4,0))) || \
-    (!defined(UTS_UBUNTU_RELEASE_ABI) && \
-     LINUX_VERSION_CODE >= KERNEL_VERSION(4,6,0) && \
-     LINUX_VERSION_CODE < KERNEL_VERSION(4,7,0)) 
+       (UBUNTU_VERSION_CODE == KERNEL_VERSION(4,4,0) && UTS_UBUNTU_RELEASE_ABI >= 22))) || \
+    (LINUX_VERSION_CODE >= KERNEL_VERSION(4,4,8) && LINUX_VERSION_CODE < KERNEL_VERSION(4,5,0)) || \
+    (LINUX_VERSION_CODE >= KERNEL_VERSION(4,6,0) && LINUX_VERSION_CODE < KERNEL_VERSION(4,7,0)) 
     ret = __sk_detach_filter(pfr->sk, sock_owned_by_user(pfr->sk));
 #else
     ret = sk_detach_filter(pfr->sk);
